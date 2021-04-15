@@ -1,0 +1,93 @@
+<DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UFT -8">
+        <meta name="viewport" content="width=device-width, initial scale:1.0">
+        <meta http-equiv="X-UA Compatible" content="ie-edge">
+        <title>Pagina de seguimiento de taxis - Tio Taxi</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="externo/boostrap/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="css/keyframes.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/banner.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+        
+    </head>
+
+
+
+    <body>
+        <section>
+            <div class="ewk_cont_banner">
+                <div class="ewk_sombra">
+                <h1>Tio Taxi</h1>
+                <p>Soluciones pensadas para usted</p>
+                
+                <h2><table class="default">
+
+                    <tr> 
+                      <th>Latitud</th>
+                  
+                      <th>Longitud</th>
+                  
+                      <th>Tiempo</th>
+                  
+                    </tr>
+                <!-- Necesitamos cambiar dato lati, dato longi y horaa por los datos de la base de datos -->
+                    <tr>
+                      <td>Dato lati</td>
+                  
+                      <td>Dato longi</td>
+                  
+                      <td>Horaa</td>
+                  
+                    </tr>
+                  
+                  </table></h2>
+                <h3> Seleccione la fecha y hora a revisar</h3>
+                <p> 
+                    <input type="text" name="datetimes" />
+                    <script>
+                    $(function() {
+                      $('input[name="datetimes"]').daterangepicker({
+                        timePicker: true,
+                        startDate: moment().startOf('hour'),
+                        endDate: moment().startOf('hour').add(32, 'hour'),
+                        locale: {
+                          format: 'M/DD hh:mm A'
+                        }
+                      });
+                    });
+                    </script>
+                </p>
+                </div>
+            </div>
+            </section>   
+
+        <section>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                          
+            <div id="myMap" style="height: 600px"> 
+                <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                crossorigin=""></script>
+                <script src="map.js"></script> 
+            </div>
+        </section>  
+<section>
+    <div class = "chat-container">
+        
+
+    </div>
+</section>
+    <script src="JS/index.js"></script>
+    </body>
+</html>
