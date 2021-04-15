@@ -33,8 +33,7 @@
                 
                 <h2><table class="default">
 
-                    <tr>
-                      <script type="text/javascript" src="buscador.js"></script> 
+                    <tr> 
                       <th>Latitud</th>
                   
                       <th>Longitud</th>
@@ -42,19 +41,8 @@
                       <th>Tiempo</th>
                   
                     </tr>
-                  
+                <!-- Necesitamos cambiar dato lati, dato longi y horaa por los datos de la base de datos -->
                     <tr>
-                      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                      <script>
-                        $(document).ready(function () {
-                          $.getScript("app.js", function (data, textStatus, jqxhr) {
-                            console.log(data); // Data returned
-                            console.log(textStatus); // Success
-                            console.log(jqxhr.status); // 200
-                            console.log("Load was performed.");
-                          });
-                        });
-                      </script>
                       <td>Dato lati</td>
                   
                       <td>Dato longi</td>
@@ -67,7 +55,6 @@
                 <h3> Seleccione la fecha y hora a revisar</h3>
                 <p> 
                     <input type="text" name="datetimes" />
-
                     <script>
                     $(function() {
                       $('input[name="datetimes"]').daterangepicker({
@@ -87,16 +74,7 @@
 
         <section>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $.getScript("app.js", function (data, textStatus, jqxhr) {
-          console.log(data); // Data returned
-          console.log(textStatus); // Success
-          console.log(jqxhr.status); // 200
-          console.log("Load was performed.");
-        });
-      });
-    </script>                                        
+                                          
             <div id="myMap" style="height: 600px"> 
                 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="

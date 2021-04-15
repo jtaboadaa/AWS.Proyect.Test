@@ -13,10 +13,13 @@ conexion.connect;
 let consulta = squel.select()
     .field('latitud')
     .field('longitud')
-    .field('tiempo');
+    .field('tiempo')
+    // Pasar variable de index.html
+    .where('tiempo = timestap');
 
 console.log('Consulta SQL:', consulta.toString());
 
+// Llevar esta variable a index.html y a map.js
 conexion.query(consulta.toString(), function(error, registros, campos){
     if (error){
         throw(error)
