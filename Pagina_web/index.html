@@ -34,7 +34,7 @@
                 <h2><table class="default">
 
                     <tr>
-                  
+                      <script type="text/javascript" src="buscador.js"></script> 
                       <th>Latitud</th>
                   
                       <th>Longitud</th>
@@ -44,7 +44,17 @@
                     </tr>
                   
                     <tr>
-                  
+                      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                      <script>
+                        $(document).ready(function () {
+                          $.getScript("app.js", function (data, textStatus, jqxhr) {
+                            console.log(data); // Data returned
+                            console.log(textStatus); // Success
+                            console.log(jqxhr.status); // 200
+                            console.log("Load was performed.");
+                          });
+                        });
+                      </script>
                       <td>Dato lati</td>
                   
                       <td>Dato longi</td>
@@ -76,7 +86,17 @@
             </section>   
 
         <section>
-                                                  
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $.getScript("app.js", function (data, textStatus, jqxhr) {
+          console.log(data); // Data returned
+          console.log(textStatus); // Success
+          console.log(jqxhr.status); // 200
+          console.log("Load was performed.");
+        });
+      });
+    </script>                                        
             <div id="myMap" style="height: 600px"> 
                 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
