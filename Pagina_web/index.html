@@ -18,7 +18,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+<link type="text/javascript" href="index1.js">
         
     </head>
 
@@ -27,28 +27,42 @@
     <body>
         <section>
             <div class="ewk_cont_banner">
+              
                 <div class="ewk_sombra">
                 <h1>Tio Taxi</h1>
                 <p>Soluciones pensadas para usted</p>
                 
-                <h2><table class="default">
-
+                <h2> <table class="default">
+                  
                     <tr> 
+                      <th>Taxi</th>
+
                       <th>Latitud</th>
                   
                       <th>Longitud</th>
                   
                       <th>Tiempo</th>
-                  
-                    </tr>
+                     
+                  </tr>
                 <!-- Necesitamos cambiar dato lati, dato longi y horaa por los datos de la base de datos -->
+                <tr>
+                      <td> Taxi 1</td>
+                      <td>10.42284</td>
+                  
+                      <td>-75.5493</td>
+                  
+                      <td>04/21 01:46 AM 2021</td>
+                      
+                    </tr>
+
                     <tr>
-                      <td>Dato lati</td>
+                      <td> Taxi 2</td>
+                      <td>10.4178</td>
                   
-                      <td>Dato longi</td>
+                      <td>-75.5413</td>
                   
-                      <td>Horaa</td>
-                  
+                      <td>04/21 01:46 AM 2021</td>
+                      
                     </tr>
                   
                   </table></h2>
@@ -62,20 +76,25 @@
                         startDate: moment().startOf('hour'),
                         endDate: moment().startOf('hour').add(32, 'hour'),
                         locale: {
-                          format: 'M/DD hh:mm A'
+                          format: 'A/M/DD hh:mm:00'
                         }
                       });
                     });
                     </script>
                 </p>
+                <p>Taxi:
+                  <input type="radio" name="hm" value="t1" required> Taxi 1
+                  <input type="radio" name="hm" value="t2"> Taxi 2
+                </p>
+                <p>
+                  <input type="button" value="Busca" name="buscar">
+                </p>
                 </div>
             </div>
             </section>   
 
-        <section>
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                                          
-            <div id="myMap" style="height: 600px"> 
+        <section>                                
+           <div id="myMap" style="height: 600px"> 
                 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                 crossorigin=""></script>

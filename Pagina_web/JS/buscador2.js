@@ -5,7 +5,7 @@ let conexion = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'taxi'
+    database: 'taxi2'
 });
 
 conexion.connect;

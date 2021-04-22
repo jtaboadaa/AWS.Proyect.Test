@@ -12,7 +12,7 @@ io.on('connection', () => {
     console.log('new connection');  
 })
 // settings
-app.set('port', process.eventNames.PORT || 5548);
+app.set('port', process.env.PORT || 1337 );
 
 // static files
 

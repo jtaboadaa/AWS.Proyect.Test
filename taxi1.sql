@@ -1,0 +1,69 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 22-04-2021 a las 11:06:48
+-- Versión del servidor: 10.4.17-MariaDB
+-- Versión de PHP: 8.0.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `taxi1`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datos`
+--
+
+CREATE TABLE `datos` (
+  `Latitud` double DEFAULT NULL,
+  `Longitud` double DEFAULT NULL,
+  `Tiempo` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `datos`
+--
+
+INSERT INTO `datos` (`Latitud`, `Longitud`, `Tiempo`) VALUES
+(10.42284, -75.5493, '2021-04-22 02:44:04'),
+(10.4225, -75.5491, '2021-04-22 02:49:04'),
+(10.4221, -75.5495, '2021-04-22 02:53:04'),
+(10.4216, -75.5499, '2021-04-22 02:58:04'),
+(10.421, -75.5504, '2021-04-22 03:03:04'),
+(10.4205, -75.551, '2021-04-22 03:08:04'),
+(10.4199, -75.5517, '2021-04-22 03:13:04'),
+(10.4197, -75.5526, '2021-04-22 03:18:04'),
+(10.4201, -75.553, '2021-04-22 03:24:04'),
+(10.4206, -75.5532, '2021-04-22 03:29:04'),
+(10.4213, -75.5534, '2021-04-22 03:34:04'),
+(10.4218, -75.5535, '2021-04-22 03:44:04'),
+(10.4225, -75.5539, '2021-04-22 03:45:04'),
+(10.4234, -75.5542, '2021-04-22 03:46:04'),
+(10.4245, -75.5544, '2021-04-22 03:48:04'),
+(10.4252, -75.5539, '2021-04-22 03:49:04'),
+(10.4256, -75.5536, '2021-04-22 04:10:04'),
+(10.4258, -75.5531, '2021-04-22 04:16:04'),
+(10.4261, -75.5528, '2021-04-22 04:20:04'),
+(10.4267, -75.5519, '2021-04-22 04:27:04'),
+(10.4275, -75.551, '2021-04-22 04:37:04'),
+(10.4279, -75.5503, '2021-04-22 04:44:04'),
+(10.4284, -75.5495, '2021-04-22 04:49:04'),
+(10.4292, -75.5485, '2021-04-22 04:48:04');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
