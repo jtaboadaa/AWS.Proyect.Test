@@ -1,5 +1,5 @@
 // Server
-const dgram = requiere('dgram');
+const dgram = require('dgram');
 
 const server = dgram.createSocket('udp4');
 
