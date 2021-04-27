@@ -9,8 +9,8 @@ server.on('message', (msg, rinfo) => {
     console.log(`${rinfo.address}:${rinfo.port} - ${msg}`);
 });
 
-const PORT = 222;
-const HOST = 'ip';
+const PORT = 37777;
+const HOST = '34.232.169.125';
 server.bind(PORT, HOST);
 
 // Cliente
@@ -19,7 +19,7 @@ setInterval(function () {
 
     const client = dgram.createSocket('udp4');
 
-client.send('Pluralsight rocks', PORT, HOST, (err) => {
+client.send('holis', PORT, HOST, (err) => {
 if (err) throw err;
 
 console.log('UDP message sent');
