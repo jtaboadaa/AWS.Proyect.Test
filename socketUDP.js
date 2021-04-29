@@ -10,7 +10,7 @@ server.on('message', (msg, rinfo) => {
 });
 
 const PORT = 37777;
-const HOST = '34.232.169.125';
+const HOST = '54.144.9.5';
 server.bind(PORT, HOST);
 
 // Cliente
