@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.app.RemoteAction;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -39,15 +40,17 @@ import org.w3c.dom.Text;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -62,87 +65,84 @@ import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
-    ExecutorService executorService = Executors.newFixedThreadPool(1);
-    private final int MILISEGUNDOS_ESPERA = 3000;
-
     TextView tvFecha;
     TextView tvHora;
     TextView tvLongitud;
     TextView tvLatitud;
     Button btnEnviar;
 
+    ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private final int MILISEGUNDOS_ESPERA = 3000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tvFecha = (TextView)findViewById(R.id.tvFecha);
-        tvHora = (TextView)findViewById(R.id.tvHora);
-        tvLongitud = (TextView)findViewById(R.id.tvLongitud);
-        tvLatitud = (TextView)findViewById(R.id.tvLatitud);
+        tvFecha = (TextView) findViewById(R.id.tvFecha);
+        tvHora = (TextView) findViewById(R.id.tvHora);
+        tvLongitud = (TextView) findViewById(R.id.tvLongitud);
+        tvLatitud = (TextView) findViewById(R.id.tvLatitud);
 
         btnEnviar = (Button) findViewById(R.id.btnEnviar);
 
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
+        String date = String.valueOf(android.text.format.DateFormat.format("MM-dd-yyyy", new java.util.Date()));
+        String hour = String.valueOf(android.text.format.DateFormat.format("HH:mm", new java.util.Date()));
+        tvHora.setText(hour);
+        tvFecha.setText(date);
+        int permissionCheck1 = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
 
+        LocationManager locationManager = (LocationManager) MainActivity.this.getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+
+                tvLatitud.setText("" + location.getLatitude());
+                tvLongitud.setText("" + location.getLongitude());
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            public void onProviderEnabled(String provider) {
+            }
+
+            public void onProviderDisabled(String provider) {
+            }
+
+        };
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, locationListener);
+
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
 
             @SuppressWarnings("deprecation")
             @Override
             public void onClick(View v) {
-                String date = String.valueOf(android.text.format.DateFormat.format("MM-dd-yyyy", new java.util.Date()));
-                String hour = String.valueOf(android.text.format.DateFormat.format("HH:mm", new java.util.Date()));
 
-                tvFecha.setText(date);
-                tvHora.setText((hour));
-
-                LocationManager locationManager = (LocationManager) MainActivity.this.getSystemService(Context.LOCATION_SERVICE);
-                LocationListener locationListener = new LocationListener() {
-                    public void onLocationChanged(Location location) {
-
-                        // Called when a new location is found by the network location provider.
-                        tvLatitud.setText(""+ location.getLatitude());
-                        tvLongitud.setText(""+location.getLongitude());
-                    }
-
-                    public void onStatusChanged(String provider, int status, Bundle extras) {
-                    }
-
-                    public void onProviderEnabled(String provider) {
-                    }
-
-                    public void onProviderDisabled(String provider) {
-                    }
-
-                    ;
-
-                };
                 Toast.makeText(MainActivity.this, "Ubicacion Enviada", Toast.LENGTH_LONG).show();
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            int permissionCheck1 = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
-                            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, locationListener);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                            String msn = String.format(tvFecha.getText().toString(), tvHora.getText().toString(), tvLatitud.getText().toString(), tvLongitud.getText().toString());
-                            MessageSender sender = new MessageSender(msn);
-                            executorService.submit(sender);
-                            handler.postDelayed(this, MILISEGUNDOS_ESPERA);
-                        }
-                    }, MILISEGUNDOS_ESPERA);
+                        final String time = date + "," + hour + "," + tvLatitud.getText() + "," + tvLongitud.getText();
 
+                        String msn = String.format(time);
+                        MessageSender sender = new MessageSender(msn);
+                        executorService.submit(sender);
+                        handler.postDelayed(this, MILISEGUNDOS_ESPERA);
+                    }
+                }, MILISEGUNDOS_ESPERA);
 
-
+                base("http://taximan.ddns.net/phpmyadmin");
             }
         });
 
 
-
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
-        if(permissionCheck == PackageManager.PERMISSION_DENIED){
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
 
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 
             } else {
 
@@ -152,7 +152,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void base(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                response -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        Toast.makeText(getApplicationContext(), jsonObject.getString("Good"), Toast.LENGTH_LONG).show();
 
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
 
-
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("time", tvFecha.getText().toString() );
+                params.put("latitud", tvLatitud.getText().toString());
+                params.put("longitud", tvLongitud.getText().toString());
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 }
+
+

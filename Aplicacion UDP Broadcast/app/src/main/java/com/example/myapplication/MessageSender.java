@@ -11,15 +11,13 @@ import kotlin.jvm.internal.Intrinsics;
 
 public class MessageSender implements Runnable {
 
-    private String[] RemoteHosts = new String[]{"localhost","34.193.232.152","34.232.169.125","52.203.18.125"};
+    private String[] RemoteHosts = new String[]{"54.144.9.5","34.193.232.152","34.232.169.125","52.203.18.125"};
     private int RemotePort = 37777;
-    PrintWriter pw;
 
     public final String[] getHosts() {
         return this.RemoteHosts;
     }
 
-    private final String send;
     public final int getPort() {
         return this.RemotePort;
     }
@@ -28,6 +26,8 @@ public class MessageSender implements Runnable {
         Intrinsics.checkNotNullParameter(host, "host");
         this.RemoteHosts[4] = host;
     }
+
+    private final String send;
 
     public MessageSender(String msn){
         send = msn;
